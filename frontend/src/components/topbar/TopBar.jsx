@@ -22,7 +22,7 @@ export default function TopBar() {
         </div>
 
         <div className='topRight'>
-            <img className='topAvatar' src={require('../image/violet.jpg')} alt="Avatar" />
+            <img className='topAvatar' src={require('../../image/violet.jpg')} alt="Avatar" />
             <i className="topSearchIcon fa-solid fa-magnifying-glass"></i>
         </div>
 

@@ -7,7 +7,7 @@ export default function Header() {
         <span className='headerTitlesLg'>光</span>  
         <span className='headerTitlesSm'>Welcome to Hikari</span>  
       </div> 
-      <img className='headerImage' src={require('../image/scarletnexus.jpg')} alt="background" />
+      <img className='headerImage' src={require('../../image/scarletnexus.jpg')} alt="background" />
     </div>
   )
 }

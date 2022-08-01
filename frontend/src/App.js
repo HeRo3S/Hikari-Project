@@ -16,14 +16,23 @@ function App() {
   const user = false;
   return (
     <Router>
-      <TopBar/>
+      <TopBar />
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/register" element={user ? <Navigate to="/"/> : <Register/>} /> 
-        <Route path="/login" element={user ? <Navigate to="/"/> : <Login/>} />
-        <Route path="/write" element={user ? <Write/> : <Navigate to="/login"/>} />
-        <Route path="/settings" element={user ? <Settings/> : <Navigate to='/login'/>} />
-        <Route path="/post/:postId" element={<Single/>} />
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/register"
+          element={user ? <Navigate to="/" /> : <Register />}
+        />
+        <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+        <Route
+          path="/write"
+          element={user ? <Write /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/settings"
+          element={user ? <Settings /> : <Navigate to="/login" />}
+        />
+        <Route path="/post/:postId" element={<Single />} />
       </Routes>
     </Router>
   );

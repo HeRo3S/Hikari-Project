@@ -1,53 +1,49 @@
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "./singlepost.css";
+import axios from "axios";
+import { useState } from "react";
 
 export default function SinglePost() {
+  const location = useLocation();
+  const path = location.pathname.split("/")[2];
+  const [post, setPost] = useState({});
+
+  useEffect(() => {
+    const getPost = async () => {
+      const res = await axios.get("/posts/" + path);
+      setPost(res.data);
+    };
+    getPost();
+  }, [path]);
+
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
-        <img
-          src={require("../../image/scarletnexus.jpg")}
-          alt="postCover"
-          className="singlePostImg"
-        />
-        <h1 className="singlePostTitle">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </h1>
+        {post.photo && (
+          <img src={post.photo} alt="postCover" className="singlePostImg" />
+        )}
+        <h1 className="singlePostTitle">{post.title}</h1>
         <div className="singlePostInfo">
           <span className="singlePostAuthor">
-            Author: <b>HeRo3S</b>
+            Author:{" "}
+            <b>
+              <Link className="link" to={`/?user=${post.username}`}>
+                {post.username}
+              </Link>
+            </b>
           </span>
           <div>
-            <span className="singlePostDate">1 hour ago</span>
+            <span className="singlePostDate">
+              {new Date(post.createdAt).toDateString()}
+            </span>
             <div className="singlePostEditContainer">
               <i className="singlePostIcon fa-solid fa-pen-to-square"></i>
               <i className="singlePostIcon fa-solid fa-trash-can"></i>
             </div>
           </div>
         </div>
-        <p className="singlePostContent">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste,
-          exercitationem recusandae quos voluptatem expedita quod, porro modi et
-          doloremque accusamus molestias, deleniti tempora rem odit? Voluptas
-          tempore incidunt nihil consequatur. Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Iste, exercitationem recusandae quos
-          voluptatem expedita quod, porro modi et doloremque accusamus
-          molestias, deleniti tempora rem odit? Voluptas tempore incidunt nihil
-          consequatur. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Iste, exercitationem recusandae quos voluptatem expedita quod, porro
-          modi et doloremque accusamus molestias, deleniti tempora rem odit?
-          Voluptas tempore incidunt nihil consequatur. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Iste, exercitationem recusandae
-          quos voluptatem expedita quod, porro modi et doloremque accusamus
-          molestias, deleniti tempora rem odit? Voluptas tempore incidunt nihil
-          consequatur. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Iste, exercitationem recusandae quos voluptatem expedita quod, porro
-          modi et doloremque accusamus molestias, deleniti tempora rem odit?
-          Voluptas tempore incidunt nihil consequatur. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Iste, exercitationem recusandae
-          quos voluptatem expedita quod, porro modi et doloremque accusamus
-          molestias, deleniti tempora rem odit? Voluptas tempore incidunt nihil
-          consequatur.
-        </p>
+        <p className="singlePostContent">{post.description}</p>
       </div>
     </div>
   );

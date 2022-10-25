@@ -5,6 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 
 export default function SinglePost() {
+  const PublicFolder = "http://localhost:5000/images/";
   const location = useLocation();
   const path = location.pathname.split("/")[2];
   const [post, setPost] = useState({});
@@ -21,7 +22,11 @@ export default function SinglePost() {
     <div className="singlePost">
       <div className="singlePostWrapper">
         {post.photo && (
-          <img src={post.photo} alt="postCover" className="singlePostImg" />
+          <img
+            src={PublicFolder + post.photo}
+            alt="postCover"
+            className="singlePostImg"
+          />
         )}
         <h1 className="singlePostTitle">{post.title}</h1>
         <div className="singlePostInfo">
